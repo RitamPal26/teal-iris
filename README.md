@@ -58,9 +58,9 @@ Repository for Team teal-iris - Spring 2026 Cohort. It is structured as a monore
 
 | Role | Discord | LinkedIn | GitHub |
 |------|------|----------|--------|
-| Contributor | Samuell |  —  | [GitHub](https://github.com/TraveledTiger) |
-| Contributor | Sniper |  — | [GitHub](https://github.com/ajiva84) |
-| Contributor | VooDooRe |  —  | [GitHub](https://github.com/nurmukhammad03) |
+| Contributor | Samuell | [LinkedIn](https://www.linkedin.com/in/samuel-n-brown/)  | [GitHub](https://github.com/TraveledTiger) |
+| Contributor | Sniper | [LinkedIn](https://www.linkedin.com/in/azamjiva/)   | [GitHub](https://github.com/ajiva84) |
+| Contributor | VooDooRe |  [LinkedIn](http://www.linkedin.com/in/nurmukhammad-sayfiddinov-3709851bb)  | [GitHub](https://github.com/nurmukhammad03) |
 | Contributor | DayDayUp23 | [LinkedIn](https://www.linkedin.com/in/william-d-miller-jr) | [GitHub](https://github.com/bijiyiqi2017) |
 
 
@@ -70,9 +70,10 @@ Repository for Team teal-iris - Spring 2026 Cohort. It is structured as a monore
 |------|------|----------|--------|
 | Contributor | Tihomir| [LinkedIn](https://www.linkedin.com/in/tihomir-manushev-066782b3/) | [GitHub](https://github.com/haraGADygyl) |
 |Contributor | SirLancelot | [LinkedIn](https://www.linkedin.com/in/pragyan-srivastava-ba3b24383/) | [GitHub](https://github.com/SirLancelot-13) |
-|Contributor | abhisar |  —  | [GitHub](https://github.com/abhisar7) |
-|Contributor | RitamJuniorPal |  —  | [GitHub](https://github.com/RitamPal26) |
-|Contributor | Ayushi  |  —  | [GitHub](https://github.com/19-ayushi)|
+|Contributor | abhisar |  [LinkedIn](https://www.linkedin.com/in/abhisar-kumar-588ab7226)  | [GitHub](https://github.com/abhisar7) |
+|Contributor | RitamJuniorPal |  [LinkedIn](https://www.linkedin.com/in/ritam-pal-124175244/)  | [GitHub](https://github.com/RitamPal26) |
+|Contributor | Ayushi  |  [LinkedIn](https://www.linkedin.com/in/ayushi-agrawal-216582234/)  | [GitHub](https://github.com/19-ayushi)|
+
 ## Getting Started
 
 For setup instructions, prerequisites, and development commands, see [CONTRIBUTING.md](CONTRIBUTING.md).
