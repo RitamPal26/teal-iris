@@ -1,17 +1,29 @@
-// apps/backend/src/auth/auth.service.ts
-
-// Check if email exists, Hash password, Save user, Return response
-
-import { ConflictException, Inject, Injectable } from "@nestjs/common";
+// apps/backend/src/modules/auth/auth.service.ts
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 
-import { DRIZZLE } from "../db/db.module.js";
-import * as schema from "../db/schema.js";
-import { users } from "../db/schema.js";
+import { DRIZZLE } from "../../db/db.module.js";
+import * as schema from "../../db/schema.js";
+import { users } from "../../db/schema.js";
 import { RegisterDto } from "./dto/register.dto.js";
+
+export interface SafeUser {
+  id: string;
+  email: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  nativeLanguage: string;
+  targetLanguage: string;
+  createdAt: Date;
+}
 
 @Injectable()
 export class AuthService {
@@ -21,7 +33,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(dto: RegisterDto) {
+  async register(dto: RegisterDto): Promise<SafeUser> {
     const {
       email,
       password,
@@ -31,7 +43,6 @@ export class AuthService {
       targetLanguage,
     } = dto;
 
-    // Check if email already exists
     const existingUser = await this.db.query.users.findFirst({
       where: eq(users.email, email),
     });
@@ -40,10 +51,8 @@ export class AuthService {
       throw new ConflictException("Email already in use");
     }
 
-    //  Hash the password (NEVER store plain text)
     const passwordHash = await bcrypt.hash(password, 12);
 
-    // Insert user into database
     const [user] = await this.db
       .insert(users)
       .values({
@@ -64,24 +73,29 @@ export class AuthService {
         createdAt: users.createdAt,
       });
 
-    // Return safe user profile (no passwordHash)
     return user;
   }
 
-  async validateUser(email: string, pass: string): Promise<any> {
+  async validateUser(email: string, pass: string): Promise<SafeUser> {
     const user = await this.db.query.users.findFirst({
       where: eq(users.email, email),
     });
 
-    if (user && (await bcrypt.compare(pass, user.passwordHash))) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { passwordHash, ...result } = user;
-      return result;
+    if (!user) {
+      throw new UnauthorizedException("User with this email was not found");
     }
-    return null;
+
+    const isMatch = await bcrypt.compare(pass, user.passwordHash);
+    if (!isMatch) {
+      throw new UnauthorizedException("The password provided is incorrect");
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { passwordHash, ...result } = user;
+    return result;
   }
 
-  async login(user: any) {
+  async login(user: SafeUser) {
     const payload = { email: user.email, sub: user.id };
     return {
       accessToken: this.jwtService.sign(payload),
