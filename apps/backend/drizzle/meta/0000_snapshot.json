@@ -1,5 +1,5 @@
 {
-  "id": "009a0db6-35c9-4cd3-8ab3-04f19a4735a4",
+  "id": "f0d4f130-84be-4104-b1c9-e7343c3160e5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -112,7 +112,38 @@
           "default": "now()"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "users_native_language_id_idx": {
+          "name": "users_native_language_id_idx",
+          "columns": [
+            {
+              "expression": "native_language_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "users_target_language_id_idx": {
+          "name": "users_target_language_id_idx",
+          "columns": [
+            {
+              "expression": "target_language_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "users_native_language_id_languages_id_fk": {
           "name": "users_native_language_id_languages_id_fk",
@@ -124,7 +155,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         },
         "users_target_language_id_languages_id_fk": {
@@ -137,7 +168,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         }
       },

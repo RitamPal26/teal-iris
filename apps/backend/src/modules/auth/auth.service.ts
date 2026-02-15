@@ -52,6 +52,12 @@ export class AuthService {
       throw new ConflictException("Email already in use");
     }
 
+    if (nativeLanguage === targetLanguage) {
+      throw new BadRequestException(
+        "Native and target language must be different",
+      );
+    }
+
     const nativeLang = await this.db.query.languages.findFirst({
       where: eq(languages.code, nativeLanguage),
     });
