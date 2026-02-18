@@ -12,6 +12,7 @@ export const users = pgTable("users", {
   lastName: varchar("last_name", { length: 100 }),
   emailVerified: timestamp("email_verified"),
   verificationToken: varchar("verification_token", { length: 255 }),
+  verificationTokenExpiry: timestamp("verification_token_expiry"),
   // Language Fields
   nativeLanguage: varchar("native_language", { length: 10 }).notNull(), // e.g., 'en', 'es'
   targetLanguage: varchar("target_language", { length: 10 }).notNull(),
